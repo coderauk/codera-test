@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>codera-test</artifactId>
+	<packaging>pom</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<parent>
+		<groupId>uk.co.codera</groupId>
+		<artifactId>codera-parent-github</artifactId>
+		<version>0.0.13-SNAPSHOT</version>
+	</parent>	
+
+	<description>Parent pom file for Codera Test</description>
+	<url>https://github.com/coderauk/codera-test</url>
+
+	<licenses>
+		<license>
+			<name>MIT License</name>
+			<url>https://raw.githubusercontent.com/coderauk/codera-test/master/LICENSE</url>
+		</license>
+	</licenses>
+
+	<scm>
+		<connection>scm:git:git@github.com:coderauk/codera-test.git</connection>
+		<developerConnection>scm:git:git@github.com:coderauk/codera-test.git</developerConnection>
+		<url>git@github.com:coderauk/codera-test.git</url>
+	  	<tag>HEAD</tag>
+  	</scm>
+
+  	<modules>
+  		<module>codera-test-data</module>
+  	</modules>
+
+</project>
