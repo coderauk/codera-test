@@ -49,9 +49,15 @@
                                                                                                                                                                                                                                                         <li class="collapsed">
                           <a href="project-info.html" title="Project Information">Project Information</a>
                   </li>
-                                                                              <li class="expanded">
+                                                                                                                  <li class="expanded">
                           <a href="project-reports.html" title="Project Reports">Project Reports</a>
                     <ul>
+                      <li class="none">
+                          <a href="apidocs/index.html" title="JavaDocs">JavaDocs</a>
+            </li>
+                      <li class="none">
+                          <a href="testapidocs/index.html" title="Test JavaDocs">Test JavaDocs</a>
+            </li>
                       <li class="none">
             <strong>Surefire Report</strong>
           </li>
@@ -86,7 +92,8 @@ function toggleDisplay(elementId) {
 <div class="section">
 <h2><a name="Surefire_Report"></a>Surefire Report</h2></div>
 <div class="section">
-<h2><a name="Summary"></a>Summary</h2><a name="Summary"></a><br />
+<h2><a name="Summary"></a>Summary</h2><a name="Summary"></a>
+<p>[<a href="#Summary">Summary</a>] [<a href="#Package_List">Package List</a>] [<a href="#Test_Cases">Test Cases</a>]</p><br />
 <table border="1" class="bodyTable">
 <tr class="a">
 <th>Tests</th>
@@ -96,13 +103,77 @@ function toggleDisplay(elementId) {
 <th>Success Rate</th>
 <th>Time</th></tr>
 <tr class="b">
+<td>4</td>
 <td>0</td>
 <td>0</td>
 <td>0</td>
-<td>0</td>
-<td>0%</td>
-<td>0</td></tr></table><br />
+<td>100%</td>
+<td>0.013</td></tr></table><br />
 <p>Note: failures are anticipated and checked for with assertions while errors are unanticipated.</p><br /></div>
+<div class="section">
+<h2><a name="Package_List"></a>Package List</h2><a name="Package_List"></a>
+<p>[<a href="#Summary">Summary</a>] [<a href="#Package_List">Package List</a>] [<a href="#Test_Cases">Test Cases</a>]</p><br />
+<table border="1" class="bodyTable">
+<tr class="a">
+<th>Package</th>
+<th>Tests</th>
+<th>Errors </th>
+<th>Failures</th>
+<th>Skipped</th>
+<th>Success Rate</th>
+<th>Time</th></tr>
+<tr class="b">
+<td><a href="#uk.co.codera.test.data">uk.co.codera.test.data</a></td>
+<td>4</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.013</td></tr></table><br />
+<p>Note: package statistics are not computed recursively, they only sum up all of its testsuites numbers.</p>
+<div class="section">
+<h3><a name="uk.co.codera.test.data"></a>uk.co.codera.test.data</h3><a name="uk.co.codera.test.data"></a>
+<table border="1" class="bodyTable">
+<tr class="a">
+<th></th>
+<th>Class</th>
+<th>Tests</th>
+<th>Errors </th>
+<th>Failures</th>
+<th>Skipped</th>
+<th>Success Rate</th>
+<th>Time</th></tr>
+<tr class="b">
+<td><a href="#uk.co.codera.test.dataLongSequenceGeneratorTest"><img src="images/icon_success_sml.gif" alt="" /></a></td>
+<td><a href="#uk.co.codera.test.dataLongSequenceGeneratorTest">LongSequenceGeneratorTest</a></td>
+<td>4</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.013</td></tr></table></div><br /></div>
+<div class="section">
+<h2><a name="Test_Cases"></a>Test Cases</h2><a name="Test_Cases"></a>
+<p>[<a href="#Summary">Summary</a>] [<a href="#Package_List">Package List</a>] [<a href="#Test_Cases">Test Cases</a>]</p>
+<div class="section">
+<h3><a name="LongSequenceGeneratorTest"></a>LongSequenceGeneratorTest</h3><a name="uk.co.codera.test.dataLongSequenceGeneratorTest"></a>
+<table border="1" class="bodyTable">
+<tr class="a">
+<td><img src="images/icon_success_sml.gif" alt="" /></td>
+<td><a name="TC_uk.co.codera.test.data.LongSequenceGeneratorTest.shouldStartFromZeroByDefault"></a>shouldStartFromZeroByDefault</td>
+<td>0.008</td></tr>
+<tr class="b">
+<td><img src="images/icon_success_sml.gif" alt="" /></td>
+<td><a name="TC_uk.co.codera.test.data.LongSequenceGeneratorTest.shouldBeAbleToStartGeneratorFromNegativeNumber"></a>shouldBeAbleToStartGeneratorFromNegativeNumber</td>
+<td>0</td></tr>
+<tr class="a">
+<td><img src="images/icon_success_sml.gif" alt="" /></td>
+<td><a name="TC_uk.co.codera.test.data.LongSequenceGeneratorTest.shouldIncrementCorrectly"></a>shouldIncrementCorrectly</td>
+<td>0.005</td></tr>
+<tr class="b">
+<td><img src="images/icon_success_sml.gif" alt="" /></td>
+<td><a name="TC_uk.co.codera.test.data.LongSequenceGeneratorTest.shouldBeAbleToStartGeneratorFromNumberOtherThanZero"></a>shouldBeAbleToStartGeneratorFromNumberOtherThanZero</td>
+<td>0</td></tr></table></div><br /></div>
       </div>
     </div>
     <div class="clear">
