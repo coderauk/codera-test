@@ -4,7 +4,6 @@
 
 	<artifactId>codera-test-data</artifactId>
 	<packaging>jar</packaging>
-	<version>0.0.1-SNAPSHOT</version>
 
 	<parent>
 		<groupId>uk.co.codera</groupId>
