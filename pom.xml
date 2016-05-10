@@ -31,6 +31,7 @@
 
   	<modules>
   		<module>codera-test-data</module>
+  		<module>codera-test-junit</module>
   	</modules>
 
 </project>
