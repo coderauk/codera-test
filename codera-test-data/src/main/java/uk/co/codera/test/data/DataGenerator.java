@@ -1,7 +1,7 @@
 package uk.co.codera.test.data;
 
 @FunctionalInterface
-public interface NumberGenerator<T> {
+public interface DataGenerator<T> {
 
-    T next();
+    T create();
 }

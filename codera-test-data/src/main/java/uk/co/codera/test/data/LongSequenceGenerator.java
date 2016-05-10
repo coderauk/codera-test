@@ -2,7 +2,7 @@ package uk.co.codera.test.data;
 
 import java.util.concurrent.atomic.AtomicLong;
 
-public class LongSequenceGenerator implements NumberGenerator<Long> {
+public class LongSequenceGenerator implements DataGenerator<Long> {
 
     private final AtomicLong sequence;
 
@@ -15,7 +15,7 @@ public class LongSequenceGenerator implements NumberGenerator<Long> {
     }
 
     @Override
-    public Long next() {
+    public Long create() {
         return Long.valueOf(this.sequence.getAndIncrement());
     }
 
@@ -32,7 +32,7 @@ public class LongSequenceGenerator implements NumberGenerator<Long> {
             return this;
         }
 
-        public NumberGenerator<Long> build() {
+        public DataGenerator<Long> build() {
             return new LongSequenceGenerator(this);
         }
     }
