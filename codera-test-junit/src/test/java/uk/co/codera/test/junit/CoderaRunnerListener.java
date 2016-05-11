@@ -1,9 +1,11 @@
 package uk.co.codera.test.junit;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Function;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.runner.Description;
 import org.junit.runner.Result;
 import org.junit.runner.notification.RunListener;
@@ -25,25 +27,37 @@ public class CoderaRunnerListener extends RunListener {
 
     @Override
     public void testStarted(Description description) {
-        if (description != null && description.isTest()) {
-            reportForClass(description).addTestReport(
-                    TestMethodReport.aTestReport().methodName(description.getMethodName())
-                            .testMetadata(description.getAnnotation(TestMetadata.class)));
+        if (isTest(description)) {
+            reportForClass(description).addTestReport(aTestReport(description));
         }
     }
 
     @Override
     public void testRunFinished(Result result) throws Exception {
-        this.testClassReports.values().forEach(this::writeOutReport);
+        this.testClassReports.values().stream().map(TestClassReport.Builder::build).forEach(this::writeOutReport);
         resetListenerState();
     }
 
-    private void writeOutReport(TestClassReport.Builder report) {
-        System.out.println(toXml(report));
+    private boolean isTest(Description description) {
+        return description != null && description.isTest();
     }
 
-    private String toXml(TestClassReport.Builder report) {
-        return this.adapter.toXml(report.build());
+    private TestMethodReport.Builder aTestReport(Description description) {
+        return TestMethodReport.aTestReport().methodName(description.getMethodName())
+                .testMetadata(description.getAnnotation(TestMetadata.class));
+    }
+
+    private void writeOutReport(TestClassReport report) {
+        try {
+            FileUtils.writeStringToFile(new File("target/surefire-reports/METADATA-" + report.getTestClassName()
+                    + ".xml"), toXml(report));
+        } catch (IOException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+    private String toXml(TestClassReport report) {
+        return this.adapter.toXml(report);
     }
 
     private void resetListenerState() {
