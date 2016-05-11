@@ -1,12 +1,8 @@
 package uk.co.codera.test.junit;
 
-import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
+import java.util.function.Function;
 
 import org.junit.runner.Description;
 import org.junit.runner.Result;
@@ -18,9 +14,12 @@ public class CoderaRunnerListener extends RunListener {
     private final class DefaultTestMetadata {
     }
 
-    private Map<String, TestRunReport.Builder> testClassReports;
+    private final TestClassReportAdapter adapter;
+
+    private Map<String, TestClassReport.Builder> testClassReports;
 
     public CoderaRunnerListener() {
+        this.adapter = new TestClassReportAdapter();
         resetListenerState();
     }
 
@@ -28,26 +27,23 @@ public class CoderaRunnerListener extends RunListener {
     public void testStarted(Description description) {
         if (description != null && description.isTest()) {
             reportForClass(description).addTestReport(
-                    TestReport.aTestReport().methodName(description.getMethodName())
+                    TestMethodReport.aTestReport().methodName(description.getMethodName())
                             .testMetadata(description.getAnnotation(TestMetadata.class)));
         }
     }
 
     @Override
     public void testRunFinished(Result result) throws Exception {
-        Marshaller marshaller = JAXBContext.newInstance(TestRunReport.class).createMarshaller();
-
-        this.testClassReports.values().forEach(it -> {
-            try {
-                ByteArrayOutputStream os = new ByteArrayOutputStream();
-                marshaller.marshal(it.build(), os);
-                System.out.println(os.toString());
-            } catch (JAXBException e) {
-                e.printStackTrace();
-            }
-        });
-
+        this.testClassReports.values().forEach(this::writeOutReport);
         resetListenerState();
+    }
+
+    private void writeOutReport(TestClassReport.Builder report) {
+        System.out.println(toXml(report));
+    }
+
+    private String toXml(TestClassReport.Builder report) {
+        return this.adapter.toXml(report.build());
     }
 
     private void resetListenerState() {
@@ -58,10 +54,10 @@ public class CoderaRunnerListener extends RunListener {
         this.testClassReports = new HashMap<>();
     }
 
-    private TestRunReport.Builder reportForClass(Description testDescription) {
+    private TestClassReport.Builder reportForClass(Description testDescription) {
         return this.testClassReports.computeIfAbsent(
                 testDescription.getClassName(),
-                key -> TestRunReport.aTestRunReport().testClassName(key)
+                key -> TestClassReport.aTestRunReport().testClassName(key)
                         .defaultMetadata(metadataDefaultingIfNoAnnotationProvided(testDescription)));
     }
 

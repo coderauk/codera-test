@@ -13,7 +13,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 @XmlRootElement
-public class TestReport {
+public class TestMethodReport {
 
     @XmlElement(required = true)
     private String methodName;
@@ -25,11 +25,11 @@ public class TestReport {
     @XmlElement(name = "issue")
     private Set<String> issues;
 
-    TestReport() {
+    TestMethodReport() {
         super();
     }
 
-    public TestReport(Builder builder) {
+    public TestMethodReport(Builder builder) {
         this();
         this.methodName = builder.methodName;
         this.testType = builder.testType;
@@ -84,10 +84,10 @@ public class TestReport {
             return this;
         }
 
-        public TestReport build() {
+        public TestMethodReport build() {
             this.testType = mergeTestType();
             this.issues = mergeIssues();
-            return new TestReport(this);
+            return new TestMethodReport(this);
         }
 
         private TestType mergeTestType() {
@@ -95,6 +95,7 @@ public class TestReport {
         }
 
         private Set<String> mergeIssues() {
+            @SuppressWarnings("squid:HiddenFieldCheck")
             Set<String> issues = new HashSet<>();
             addIssues(issues, defaultMetadata);
             addIssues(issues, testMetadata);

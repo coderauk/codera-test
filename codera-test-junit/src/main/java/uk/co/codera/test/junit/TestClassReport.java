@@ -12,20 +12,20 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 @XmlRootElement
-public class TestRunReport {
+public class TestClassReport {
 
     @XmlElement(required = true)
     private String testClassName;
 
     @XmlElementWrapper(name = "tests")
     @XmlElement(name = "test", required = true)
-    private List<TestReport> testReports;
+    private List<TestMethodReport> testReports;
 
-    TestRunReport() {
+    TestClassReport() {
         super();
     }
 
-    public TestRunReport(Builder builder) {
+    public TestClassReport(Builder builder) {
         this();
         this.testClassName = builder.testClassName;
         this.testReports = Collections.unmodifiableList(new ArrayList<>(builder.testReports));
@@ -39,7 +39,7 @@ public class TestRunReport {
         return this.testClassName;
     }
 
-    public List<TestReport> getTestReports() {
+    public List<TestMethodReport> getTestReports() {
         return this.testReports;
     }
 
@@ -52,7 +52,7 @@ public class TestRunReport {
 
         private String testClassName;
         private TestMetadata defaultMetadata;
-        private final List<TestReport> testReports;
+        private final List<TestMethodReport> testReports;
 
         private Builder() {
             this.testReports = new ArrayList<>();
@@ -68,13 +68,13 @@ public class TestRunReport {
             return this;
         }
 
-        public Builder addTestReport(TestReport.Builder report) {
+        public Builder addTestReport(TestMethodReport.Builder report) {
             this.testReports.add(report.defaultMetadata(this.defaultMetadata).build());
             return this;
         }
 
-        public TestRunReport build() {
-            return new TestRunReport(this);
+        public TestClassReport build() {
+            return new TestClassReport(this);
         }
     }
 }
