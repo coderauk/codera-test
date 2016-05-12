@@ -10,7 +10,7 @@ import org.junit.runner.Description;
 import org.junit.runner.Result;
 import org.junit.runner.notification.RunListener;
 
-public class CoderaRunnerListener extends RunListener {
+public class TestMetadataRunListener extends RunListener {
 
     @TestMetadata
     private final class DefaultTestMetadata {
@@ -20,7 +20,7 @@ public class CoderaRunnerListener extends RunListener {
 
     private Map<String, TestClassReport.Builder> testClassReports;
 
-    public CoderaRunnerListener() {
+    public TestMetadataRunListener() {
         this.adapter = new TestClassReportAdapter();
         resetListenerState();
     }

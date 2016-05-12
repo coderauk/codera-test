@@ -22,7 +22,7 @@
 					<properties>
 						<property>
 							<name>listener</name>
-							<value>uk.co.codera.test.junit.CoderaRunnerListener</value>
+							<value>uk.co.codera.test.junit.TestMetadataRunListener</value>
 						</property>
 					</properties>
 				</configuration>
