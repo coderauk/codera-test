@@ -18,6 +18,11 @@ public class JaxbXmlAdapterTest {
         this.adapter = new JaxbXmlAdapter<>(TestClassReport.class);
     }
 
+    @Test(expected = IllegalStateException.class)
+    public void shouldNotBeAbleToMarshalNonAnnotatedObject() {
+        new JaxbXmlAdapter<>(Object.class).adapt(new Object());
+    }
+
     @Test
     public void shouldTransformToNonNullXmlString() {
         assertThat(adapt(aValidTestClassReport()), is(notNullValue()));
