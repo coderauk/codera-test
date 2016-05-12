@@ -49,15 +49,15 @@ public class TestMetadataRunListener extends RunListener {
 
     private void writeOutReport(TestClassReport report) {
         try {
-            FileUtils.writeStringToFile(new File("target/surefire-reports/METADATA-" + report.getTestClassName()
-                    + ".xml"), toXml(report));
+            String filename = "target/surefire-reports/METADATA-" + report.getTestClassName() + ".xml";
+            FileUtils.writeStringToFile(new File(filename), toXml(report));
         } catch (IOException e) {
             throw new IllegalStateException(e);
         }
     }
 
     private String toXml(TestClassReport report) {
-        return this.adapter.toXml(report);
+        return this.adapter.adapt(report);
     }
 
     private void resetListenerState() {
@@ -71,7 +71,7 @@ public class TestMetadataRunListener extends RunListener {
     private TestClassReport.Builder reportForClass(Description testDescription) {
         return this.testClassReports.computeIfAbsent(
                 testDescription.getClassName(),
-                key -> TestClassReport.aTestRunReport().testClassName(key)
+                key -> TestClassReport.aTestClassReport().testClassName(key)
                         .defaultMetadata(metadataDefaultingIfNoAnnotationProvided(testDescription)));
     }
 

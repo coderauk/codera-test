@@ -31,7 +31,7 @@ public class TestClassReport {
         this.testReports = Collections.unmodifiableList(new ArrayList<>(builder.testReports));
     }
 
-    public static Builder aTestRunReport() {
+    public static Builder aTestClassReport() {
         return new Builder();
     }
 
