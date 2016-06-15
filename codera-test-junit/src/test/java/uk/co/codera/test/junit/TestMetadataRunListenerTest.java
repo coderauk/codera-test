@@ -3,6 +3,9 @@ package uk.co.codera.test.junit;
 import org.junit.Test;
 import org.junit.runner.JUnitCore;
 
+import uk.co.codera.test.dto.TestMetadata;
+import uk.co.codera.test.dto.TestType;
+
 @TestMetadata(type = TestType.UNIT, issues = { "JIRA-01" })
 public class TestMetadataRunListenerTest {
 

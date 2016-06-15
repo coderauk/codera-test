@@ -32,8 +32,8 @@
 	
 	<dependencies>
 		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
+			<groupId>uk.co.codera</groupId>
+			<artifactId>codera-test-dto</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>commons-io</groupId>

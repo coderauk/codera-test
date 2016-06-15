@@ -1,4 +1,4 @@
-package uk.co.codera.test.junit;
+package uk.co.codera.test.dto;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

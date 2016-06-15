@@ -1,11 +1,14 @@
-package uk.co.codera.test.junit;
+package uk.co.codera.test.dto;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertThat;
-import static uk.co.codera.test.junit.TestClassReports.aValidTestClassReport;
+import static uk.co.codera.test.dto.TestClassReports.aValidTestClassReport;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import uk.co.codera.test.dto.TestClassReport;
+import uk.co.codera.test.dto.TestClassReportAdapter;
 
 public class TestClassReportAdapterTest {
 

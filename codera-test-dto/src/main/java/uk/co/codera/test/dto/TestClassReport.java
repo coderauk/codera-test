@@ -1,4 +1,4 @@
-package uk.co.codera.test.junit;
+package uk.co.codera.test.dto;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -51,7 +51,7 @@ public class TestClassReport {
     public static class Builder {
 
         private String testClassName;
-        private TestMetadata defaultMetadata;
+        private TestMetadata defaultMetadata = TestMetadataFactory.defaultTestMetadata();
         private final List<TestMethodReport> testReports;
 
         private Builder() {
@@ -68,7 +68,7 @@ public class TestClassReport {
             return this;
         }
 
-        public Builder addTestReport(TestMethodReport.Builder report) {
+        public Builder addTestMethodReport(TestMethodReport.Builder report) {
             this.testReports.add(report.defaultMetadata(this.defaultMetadata).build());
             return this;
         }

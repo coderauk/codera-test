@@ -10,11 +10,13 @@ import org.junit.runner.Description;
 import org.junit.runner.Result;
 import org.junit.runner.notification.RunListener;
 
-public class TestMetadataRunListener extends RunListener {
+import uk.co.codera.test.dto.TestClassReport;
+import uk.co.codera.test.dto.TestClassReportAdapter;
+import uk.co.codera.test.dto.TestMetadata;
+import uk.co.codera.test.dto.TestMetadataFactory;
+import uk.co.codera.test.dto.TestMethodReport;
 
-    @TestMetadata
-    private final class DefaultTestMetadata {
-    }
+public class TestMetadataRunListener extends RunListener {
 
     private final TestClassReportAdapter adapter;
 
@@ -28,7 +30,7 @@ public class TestMetadataRunListener extends RunListener {
     @Override
     public void testStarted(Description description) {
         if (isTest(description)) {
-            reportForClass(description).addTestReport(aTestReport(description));
+            reportForClass(description).addTestMethodReport(aTestReport(description));
         }
     }
 
@@ -43,7 +45,7 @@ public class TestMetadataRunListener extends RunListener {
     }
 
     private TestMethodReport.Builder aTestReport(Description description) {
-        return TestMethodReport.aTestReport().methodName(description.getMethodName())
+        return TestMethodReport.aTestMethodReport().methodName(description.getMethodName())
                 .testMetadata(description.getAnnotation(TestMetadata.class));
     }
 
@@ -77,6 +79,6 @@ public class TestMetadataRunListener extends RunListener {
 
     private TestMetadata metadataDefaultingIfNoAnnotationProvided(Description description) {
         TestMetadata metadata = description.getTestClass().getAnnotation(TestMetadata.class);
-        return metadata == null ? DefaultTestMetadata.class.getAnnotation(TestMetadata.class) : metadata;
+        return metadata == null ? TestMetadataFactory.defaultTestMetadata() : metadata;
     }
 }

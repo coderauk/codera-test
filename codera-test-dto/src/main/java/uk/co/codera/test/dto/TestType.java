@@ -1,4 +1,4 @@
-package uk.co.codera.test.junit;
+package uk.co.codera.test.dto;
 
 public enum TestType {
 

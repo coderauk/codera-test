@@ -1,4 +1,4 @@
-package uk.co.codera.test.junit;
+package uk.co.codera.test.dto;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -36,7 +36,7 @@ public class TestMethodReport {
         this.issues = Collections.unmodifiableSet(new HashSet<>(builder.issues));
     }
 
-    public static Builder aTestReport() {
+    public static Builder aTestMethodReport() {
         return new Builder();
     }
 
@@ -60,7 +60,7 @@ public class TestMethodReport {
     public static class Builder {
 
         private String methodName;
-        private TestMetadata defaultMetadata;
+        private TestMetadata defaultMetadata = TestMetadataFactory.defaultTestMetadata();
         private TestMetadata testMetadata;
         private TestType testType;
         private Set<String> issues;

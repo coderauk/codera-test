@@ -30,8 +30,25 @@
   	</scm>
 
   	<modules>
+  		<module>codera-test-dto</module>
   		<module>codera-test-data</module>
   		<module>codera-test-junit</module>
+  		<module>codera-test-reporting</module>
   	</modules>
+  	
+  	<dependencyManagement>
+  		<dependencies>
+  			<dependency>
+  				<groupId>uk.co.codera</groupId>
+  				<artifactId>codera-test-dto</artifactId>
+  				<version>${project.version}</version>
+  			</dependency>
+  			<dependency>
+  				<groupId>uk.co.codera</groupId>
+  				<artifactId>codera-lang</artifactId>
+  				<version>0.0.12</version>
+  			</dependency>
+  		</dependencies>
+  	</dependencyManagement>
 
 </project>
