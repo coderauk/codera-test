@@ -46,6 +46,13 @@
   			</dependency>
   			<dependency>
   				<groupId>uk.co.codera</groupId>
+  				<artifactId>codera-test-dto</artifactId>
+  				<version>${project.version}</version>
+  				<type>test-jar</type>
+  				<scope>test</scope>
+  			</dependency>
+  			<dependency>
+  				<groupId>uk.co.codera</groupId>
   				<artifactId>codera-test-io</artifactId>
   				<version>${project.version}</version>
   			</dependency>
