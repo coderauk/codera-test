@@ -36,6 +36,14 @@
 			<artifactId>codera-test-dto</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>uk.co.codera</groupId>
+			<artifactId>codera-test-io</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>uk.co.codera</groupId>
+			<artifactId>codera-lang</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 		</dependency>

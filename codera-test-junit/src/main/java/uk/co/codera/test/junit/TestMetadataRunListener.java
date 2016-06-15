@@ -1,29 +1,26 @@
 package uk.co.codera.test.junit;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.io.FileUtils;
 import org.junit.runner.Description;
 import org.junit.runner.Result;
 import org.junit.runner.notification.RunListener;
 
 import uk.co.codera.test.dto.TestClassReport;
-import uk.co.codera.test.dto.TestClassReportAdapter;
 import uk.co.codera.test.dto.TestMetadata;
 import uk.co.codera.test.dto.TestMetadataFactory;
 import uk.co.codera.test.dto.TestMethodReport;
+import uk.co.codera.test.io.TestClassReportFileWriter;
 
 public class TestMetadataRunListener extends RunListener {
 
-    private final TestClassReportAdapter adapter;
+    private final TestClassReportFileWriter fileWriter;
 
     private Map<String, TestClassReport.Builder> testClassReports;
 
     public TestMetadataRunListener() {
-        this.adapter = new TestClassReportAdapter();
+        this.fileWriter = new TestClassReportFileWriter("target/surefire-reports");
         resetListenerState();
     }
 
@@ -50,16 +47,7 @@ public class TestMetadataRunListener extends RunListener {
     }
 
     private void writeOutReport(TestClassReport report) {
-        try {
-            String filename = "target/surefire-reports/METADATA-" + report.getTestClassName() + ".xml";
-            FileUtils.writeStringToFile(new File(filename), toXml(report));
-        } catch (IOException e) {
-            throw new IllegalStateException(e);
-        }
-    }
-
-    private String toXml(TestClassReport report) {
-        return this.adapter.adapt(report);
+        this.fileWriter.write(report);
     }
 
     private void resetListenerState() {

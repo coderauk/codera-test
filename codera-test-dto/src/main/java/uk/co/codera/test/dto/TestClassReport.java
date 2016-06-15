@@ -39,7 +39,7 @@ public class TestClassReport {
         return this.testClassName;
     }
 
-    public List<TestMethodReport> getTestReports() {
+    public List<TestMethodReport> getTestMethodReports() {
         return this.testReports;
     }
 
