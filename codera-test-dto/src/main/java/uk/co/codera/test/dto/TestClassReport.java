@@ -8,6 +8,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -41,6 +43,23 @@ public class TestClassReport {
 
     public List<TestMethodReport> getTestMethodReports() {
         return this.testReports;
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append(this.testClassName).append(this.testReports.hashCode()).hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        } else if (!obj.getClass().isAssignableFrom(getClass())) {
+            return false;
+        }
+        TestClassReport other = (TestClassReport) obj;
+        return new EqualsBuilder().append(this.testClassName, other.testClassName)
+                .append(this.testReports, other.testReports).isEquals();
     }
 
     @Override

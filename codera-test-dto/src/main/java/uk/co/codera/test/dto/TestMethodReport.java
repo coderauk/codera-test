@@ -9,6 +9,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -50,6 +52,22 @@ public class TestMethodReport {
 
     public Set<String> getIssues() {
         return this.issues;
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append(this.methodName).hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        } else if (!obj.getClass().isAssignableFrom(getClass())) {
+            return false;
+        }
+        TestMethodReport other = (TestMethodReport) obj;
+        return new EqualsBuilder().append(this.methodName, other.methodName).isEquals();
     }
 
     @Override
