@@ -46,7 +46,9 @@ public final class ClassAssert {
 
     private static void instantiateForCoverage(Constructor<?> constructor) throws AssertionError {
         try {
+            constructor.setAccessible(true);
             constructor.newInstance();
+            constructor.setAccessible(false);
         } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
             throw new AssertionError("Unable to instantiate class");
         }

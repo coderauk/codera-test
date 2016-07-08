@@ -4,7 +4,7 @@ import java.io.File;
 
 import uk.co.codera.test.dto.TestClassReport;
 
-public class TestClassReportFileFactory {
+public final class TestClassReportFileFactory {
 
     private TestClassReportFileFactory() {
         super();
