@@ -1,7 +1,7 @@
 package uk.co.codera.test.dto;
 
 @TestMetadata
-public class TestMetadataFactory {
+public final class TestMetadataFactory {
 
     private TestMetadataFactory() {
         super();

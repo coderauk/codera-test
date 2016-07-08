@@ -8,7 +8,14 @@ import static uk.co.codera.test.dto.TestMetadataFactory.defaultTestMetadata;
 
 import org.junit.Test;
 
+import uk.co.codera.test.utility.ClassAssert;
+
 public class TestMetadataFactoryTest {
+
+    @Test
+    public void shouldConformToStaticUtilityClass() {
+        ClassAssert.assertStaticUtilityClass(TestMetadataFactory.class);
+    }
 
     @Test
     public void shouldNotReturnNullMetadata() {

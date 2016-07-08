@@ -17,7 +17,12 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-		</dependency>	
+		</dependency>
+		<dependency>
+			<groupId>uk.co.codera</groupId>
+			<artifactId>codera-test-util</artifactId>
+			<scope>test</scope>
+		</dependency>				
 	</dependencies>
 	
 	<build>
