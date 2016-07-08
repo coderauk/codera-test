@@ -1,7 +1,9 @@
 package uk.co.codera.test.dto;
 
 import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.hasItems;
 import static org.junit.Assert.assertThat;
@@ -34,6 +36,36 @@ public class TestMethodReportTest {
         TestMethodReport methodReport = aTestMethodReport().defaultMetadata(classLevelMetadata())
                 .testMetadata(methodLevelMetadata()).build();
         assertThat(methodReport.getIssues(), hasItems("ISSUE-1", "ISSUE-2"));
+    }
+
+    @Test
+    public void shouldNotBeEqualToNull() {
+        assertThat(aTestMethodReport().build(), is(not(equalTo(null))));
+    }
+
+    @Test
+    public void shouldNotBeEqualToDifferentType() {
+        assertThat(aTestMethodReport().build(), is(not(equalTo("a String"))));
+    }
+
+    @Test
+    public void shouldBeEqualIfForSameMethod() {
+        assertEqual(aTestMethodReport().methodName("shouldDoSomething"),
+                aTestMethodReport().methodName("shouldDoSomething"));
+    }
+
+    @Test
+    public void shouldNotBeEqualIfForDifferentMethod() {
+        assertNotEqual(aTestMethodReport().methodName("shouldDoSomething"),
+                aTestMethodReport().methodName("shouldDoSomethingElse"));
+    }
+
+    private void assertEqual(TestMethodReport.Builder report1, TestMethodReport.Builder report2) {
+        assertThat(report1.build(), is(equalTo(report2.build())));
+    }
+
+    private void assertNotEqual(TestMethodReport.Builder report1, TestMethodReport.Builder report2) {
+        assertThat(report1.build(), is(not(equalTo(report2.build()))));
     }
 
     private TestMetadata classLevelMetadata() {
