@@ -30,6 +30,7 @@
   	</scm>
 
   	<modules>
+  		<module>codera-test-util</module>
   		<module>codera-test-dto</module>
   		<module>codera-test-io</module>
   		<module>codera-test-data</module>
