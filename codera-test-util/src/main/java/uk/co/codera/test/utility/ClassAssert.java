@@ -5,6 +5,7 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 
 public final class ClassAssert {
@@ -14,33 +15,40 @@ public final class ClassAssert {
     }
 
     public static void assertStaticUtilityClass(Class<?> clazz) {
+        assertClassIfFinal(clazz);
+        assertSingleNoArgsPrivateConstructor(clazz);
+    }
+
+    private static void assertClassIfFinal(Class<?> clazz) {
         int modifiers = clazz.getModifiers();
         assertThat("Static utility class should be final", Modifier.isFinal(modifiers), is(true));
-        assertNoPublicConstructors(clazz);
+    }
+
+    private static void assertSingleNoArgsPrivateConstructor(Class<?> clazz) {
         Constructor<?>[] allConstructors = clazz.getDeclaredConstructors();
+
         if (allConstructors.length > 1) {
             failDueToLackOfSingleNoArgsPrivateConstructor();
         }
+
         Constructor<?> constructor = allConstructors[0];
-        assertNoArgs(constructor);
-        assertPrivate(constructor);
-    }
 
-    private static void assertPrivate(Constructor<?> constructor) {
-        if (!Modifier.isPrivate(constructor.getModifiers())) {
-            failDueToLackOfSingleNoArgsPrivateConstructor();
-        }
-    }
-
-    private static void assertNoArgs(Constructor<?> constructor) {
         if (constructor.getParameterTypes().length > 0) {
             failDueToLackOfSingleNoArgsPrivateConstructor();
         }
+
+        if (!Modifier.isPrivate(constructor.getModifiers())) {
+            failDueToLackOfSingleNoArgsPrivateConstructor();
+        }
+
+        instantiateForCoverage(constructor);
     }
 
-    private static void assertNoPublicConstructors(Class<?> clazz) {
-        if (clazz.getConstructors().length > 0) {
-            failDueToLackOfSingleNoArgsPrivateConstructor();
+    private static void instantiateForCoverage(Constructor<?> constructor) throws AssertionError {
+        try {
+            constructor.newInstance();
+        } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+            throw new AssertionError("Unable to instantiate class");
         }
     }
 

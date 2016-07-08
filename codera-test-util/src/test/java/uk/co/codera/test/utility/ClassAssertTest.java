@@ -50,6 +50,12 @@ public class ClassAssertTest {
         ClassAssert.assertStaticUtilityClass(PrivateConstructorWithArgsClass.class);
     }
 
+    @Test
+    public void shoulFailStaticUtilityClassThatCannotBeInstantiated() {
+        expectedAssertionError("Unable to instantiate class");
+        ClassAssert.assertStaticUtilityClass(UninstantiableClass.class);
+    }
+
     private void expectAssertionErrorDueToLackOfSinglePrivateConstructor() {
         expectedAssertionError("Static utility class should have single no-args private constructor");
     }
@@ -90,6 +96,12 @@ public class ClassAssertTest {
 
     public static final class PrivateConstructorWithArgsClass {
         private PrivateConstructorWithArgsClass(int arg) {
+        }
+    }
+
+    public static final class UninstantiableClass {
+        private UninstantiableClass() {
+            throw new UnsupportedOperationException();
         }
     }
 }
