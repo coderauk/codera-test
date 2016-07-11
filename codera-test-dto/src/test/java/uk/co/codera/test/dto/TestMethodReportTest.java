@@ -25,6 +25,12 @@ public class TestMethodReportTest {
     }
 
     @Test
+    public void shouldReturnMethodNameAsEnglish() {
+        assertThat(aTestMethodReport().methodName("shouldDoSomething").build().getMethodNameAsEnglish(),
+                is("Should Do Something"));
+    }
+
+    @Test
     public void shouldInheritClassLevelMetadataIfNoneSuppliedAtMethodLevel() {
         TestMethodReport methodReport = aTestMethodReport().defaultMetadata(classLevelMetadata()).build();
         assertThat(methodReport.getTestType(), is(TestType.INTEGRATION));

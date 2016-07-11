@@ -2,7 +2,7 @@ package uk.co.codera.test.io;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static uk.co.codera.test.dto.TestClassReports.aValidTestClassReport;
+import static uk.co.codera.test.dto.ExampleTestClassReports.aValidTestClassReport;
 
 import java.io.File;
 

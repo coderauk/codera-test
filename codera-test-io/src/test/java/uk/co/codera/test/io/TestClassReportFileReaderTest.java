@@ -13,7 +13,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import uk.co.codera.test.dto.TestClassReport;
-import uk.co.codera.test.dto.TestClassReports;
+import uk.co.codera.test.dto.ExampleTestClassReports;
 
 public class TestClassReportFileReaderTest {
 
@@ -46,7 +46,7 @@ public class TestClassReportFileReaderTest {
 
     @Test
     public void shouldBeEqualWhenReadBackToWhatWasWritten() {
-        TestClassReport originalReport = TestClassReports.aValidTestClassReport().build();
+        TestClassReport originalReport = ExampleTestClassReports.aValidTestClassReport().build();
         String filename = writeReportAndReturnFilename(originalReport);
 
         TestClassReport retrievedReport = this.fileReader.read(filename);
@@ -62,7 +62,7 @@ public class TestClassReportFileReaderTest {
     }
 
     private File writeReportAndReturnFile() {
-        return writeReportAndReturnFile(TestClassReports.aValidTestClassReport().build());
+        return writeReportAndReturnFile(ExampleTestClassReports.aValidTestClassReport().build());
     }
 
     private File writeReportAndReturnFile(TestClassReport report) {

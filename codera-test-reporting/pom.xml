@@ -12,5 +12,16 @@
 	</parent>	
 
 	<description>Codera Test Reporting</description>
+	
+	<dependencies>
+		<dependency>
+			<groupId>uk.co.codera</groupId>
+			<artifactId>codera-test-dto</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>uk.co.codera</groupId>
+			<artifactId>codera-templating-api</artifactId>
+		</dependency>
+	</dependencies>
 
 </project>

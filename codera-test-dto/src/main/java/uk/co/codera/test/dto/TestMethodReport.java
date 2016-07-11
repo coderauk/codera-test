@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -44,6 +45,11 @@ public class TestMethodReport {
 
     public String getMethodName() {
         return this.methodName;
+    }
+
+    public String getMethodNameAsEnglish() {
+        String[] words = StringUtils.splitByCharacterTypeCamelCase(this.methodName);
+        return StringUtils.capitalize(StringUtils.join(words, StringUtils.SPACE));
     }
 
     public TestType getTestType() {

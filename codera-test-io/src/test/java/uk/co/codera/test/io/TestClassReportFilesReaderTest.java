@@ -11,7 +11,7 @@ import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Test;
 
-import uk.co.codera.test.dto.TestClassReports;
+import uk.co.codera.test.dto.ExampleTestClassReports;
 
 public class TestClassReportFilesReaderTest {
 
@@ -40,7 +40,7 @@ public class TestClassReportFilesReaderTest {
         for (int i = 0; i < depth; i++) {
             path = createSubdirectory(path);
             TestClassReportFileWriter fileWriter = new TestClassReportFileWriter(path);
-            fileWriter.write(TestClassReports.aValidTestClassReport().build());
+            fileWriter.write(ExampleTestClassReports.aValidTestClassReport().build());
         }
     }
 
