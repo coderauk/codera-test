@@ -29,7 +29,37 @@ public class TestClassReportsTest {
         iterator.remove();
     }
 
+    @Test(expected = UnsupportedOperationException.class)
+    public void shouldNotBeAbleToAlterSortedCollectionViaIterator() {
+        Iterator<TestClassReport> iterator = TestClassReports.over(aTestClassReport(), aTestClassReport())
+                .sortByTestClassNameAscending().iterator();
+        iterator.next();
+        iterator.remove();
+    }
+
+    @Test
+    public void shouldBeAbleToSortByTestClassNameAscending() {
+        TestClassReport report1 = aValidTestClassReport().testClassName("shouldComeSecond").build();
+        TestClassReport report2 = aValidTestClassReport().testClassName("comesFirst").build();
+
+        Iterator<TestClassReport> iterator = TestClassReports.over(report1, report2).sortByTestClassNameAscending()
+                .iterator();
+        assertThat(iterator.next(), is(report2));
+        assertThat(iterator.next(), is(report1));
+    }
+
+    @Test
+    public void shouldBeAbleToSortByTestClassNameDescending() {
+        TestClassReport report1 = aValidTestClassReport().testClassName("comesLast").build();
+        TestClassReport report2 = aValidTestClassReport().testClassName("shouldComeFirst").build();
+
+        Iterator<TestClassReport> iterator = TestClassReports.over(report1, report2).sortByTestClassNameDescending()
+                .iterator();
+        assertThat(iterator.next(), is(report2));
+        assertThat(iterator.next(), is(report1));
+    }
+
     private TestClassReport aTestClassReport() {
-        return aValidTestClassReport().build();
+        return aValidTestClassReport().testClassName("someName").build();
     }
 }
