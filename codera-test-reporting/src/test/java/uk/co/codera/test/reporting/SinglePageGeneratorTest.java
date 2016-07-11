@@ -1,5 +1,7 @@
 package uk.co.codera.test.reporting;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.anyMapOf;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
@@ -7,11 +9,14 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static uk.co.codera.test.dto.ExampleTestClassReports.aValidTestClassReport;
 
+import java.util.Map;
 import java.util.UUID;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -28,6 +33,9 @@ public class SinglePageGeneratorTest {
 
     @Mock
     private ReportWriter mockReportWriter;
+
+    @Captor
+    private ArgumentCaptor<Map<String, Object>> modelCaptor;
 
     private ReportGenerator generator;
 
@@ -56,8 +64,24 @@ public class SinglePageGeneratorTest {
         verify(this.mockReportWriter).write(mergeResult);
     }
 
+    @Test
+    public void shouldPassTestClassReportsWithModel() {
+        TestClassReports reports = testClassReports();
+        generateReport(reports);
+        assertThat(capturedModel().get("testClassReports"), is(reports));
+    }
+
     private void generateReport() {
-        this.generator.generate(testClassReports());
+        generateReport(testClassReports());
+    }
+
+    private void generateReport(TestClassReports reports) {
+        this.generator.generate(reports);
+    }
+
+    private Map<String, Object> capturedModel() {
+        verify(this.mockTemplateEngine).merge(anyString(), this.modelCaptor.capture());
+        return this.modelCaptor.getValue();
     }
 
     private TestClassReports testClassReports() {
