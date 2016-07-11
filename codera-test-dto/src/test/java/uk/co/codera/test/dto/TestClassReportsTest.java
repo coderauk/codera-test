@@ -60,6 +60,6 @@ public class TestClassReportsTest {
     }
 
     private TestClassReport aTestClassReport() {
-        return aValidTestClassReport().testClassName("someName").build();
+        return aValidTestClassReport().build();
     }
 }

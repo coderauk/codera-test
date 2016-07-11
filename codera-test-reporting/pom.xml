@@ -22,6 +22,11 @@
 			<groupId>uk.co.codera</groupId>
 			<artifactId>codera-templating-api</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>uk.co.codera</groupId>
+			<artifactId>codera-test-dto</artifactId>
+			<type>test-jar</type>
+		</dependency>		
 	</dependencies>
 
 </project>
