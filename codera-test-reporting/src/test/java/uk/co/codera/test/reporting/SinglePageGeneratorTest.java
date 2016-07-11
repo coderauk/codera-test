@@ -19,7 +19,7 @@ import uk.co.codera.templating.TemplateEngine;
 import uk.co.codera.test.dto.TestClassReports;
 
 @RunWith(MockitoJUnitRunner.class)
-public class SinglePageHtmlGeneratorTest {
+public class SinglePageGeneratorTest {
 
     @Mock
     private TemplateEngine mockTemplateEngine;
@@ -33,7 +33,7 @@ public class SinglePageHtmlGeneratorTest {
 
     @Before
     public void before() {
-        this.generator = new SinglePageHtmlGenerator(this.mockTemplateEngine, this.template, this.mockReportWriter);
+        this.generator = new SinglePageGenerator(this.mockTemplateEngine, this.template, this.mockReportWriter);
     }
 
     @Test

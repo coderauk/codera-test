@@ -5,13 +5,13 @@ import java.util.HashMap;
 import uk.co.codera.templating.TemplateEngine;
 import uk.co.codera.test.dto.TestClassReports;
 
-public class SinglePageHtmlGenerator implements ReportGenerator {
+public class SinglePageGenerator implements ReportGenerator {
 
     private final TemplateEngine templateEngine;
     private final String template;
     private final ReportWriter reportWriter;
 
-    public SinglePageHtmlGenerator(TemplateEngine templateEngine, String template, ReportWriter reportWriter) {
+    public SinglePageGenerator(TemplateEngine templateEngine, String template, ReportWriter reportWriter) {
         this.templateEngine = templateEngine;
         this.template = template;
         this.reportWriter = reportWriter;
