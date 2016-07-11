@@ -21,7 +21,7 @@ public class TestClassReportTest {
 
     @Test
     public void shouldReturnSensibleToStringAndNotObjectReference() {
-        assertThat(TestClassReport.aTestClassReport().build().toString(), containsString("testReports="));
+        assertThat(TestClassReport.aTestClassReport().build().toString(), containsString("testMethodReports="));
     }
 
     @Test
@@ -42,6 +42,13 @@ public class TestClassReportTest {
         TestClassReport classReport = aTestClassReport().addTestMethodReport(aTestMethodReport())
                 .defaultMetadata(classLevelMetadata()).build();
         assertThat(classReport.getTestMethodReports().get(0).getTestType(), is(TestType.UNIT));
+    }
+
+    @Test
+    public void shouldReturnCorrectTestMethodReportCount() {
+        TestClassReport classReport = aTestClassReport().addTestMethodReport(aTestMethodReport())
+                .addTestMethodReport(aTestMethodReport()).build();
+        assertThat(classReport.getTestMethodReportCount(), is(2));
     }
 
     @Test

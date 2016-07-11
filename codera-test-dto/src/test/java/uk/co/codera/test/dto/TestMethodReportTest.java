@@ -45,6 +45,13 @@ public class TestMethodReportTest {
     }
 
     @Test
+    public void shouldReturnIssueCount() {
+        TestMethodReport methodReport = aTestMethodReport().defaultMetadata(classLevelMetadata())
+                .testMetadata(methodLevelMetadata()).build();
+        assertThat(methodReport.getIssueCount(), is(2));
+    }
+
+    @Test
     public void shouldNotBeEqualToNull() {
         assertThat(aTestMethodReport().build(), is(not(equalTo(null))));
     }

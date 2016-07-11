@@ -60,6 +60,10 @@ public class TestMethodReport {
         return this.issues;
     }
 
+    public int getIssueCount() {
+        return this.issues.size();
+    }
+
     @Override
     public int hashCode() {
         return new HashCodeBuilder().append(this.methodName).hashCode();

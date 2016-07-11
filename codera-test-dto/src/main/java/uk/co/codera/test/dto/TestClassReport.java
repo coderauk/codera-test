@@ -21,7 +21,7 @@ public class TestClassReport {
 
     @XmlElementWrapper(name = "tests")
     @XmlElement(name = "test", required = true)
-    private List<TestMethodReport> testReports;
+    private List<TestMethodReport> testMethodReports;
 
     TestClassReport() {
         super();
@@ -30,7 +30,7 @@ public class TestClassReport {
     public TestClassReport(Builder builder) {
         this();
         this.testClassName = builder.testClassName;
-        this.testReports = Collections.unmodifiableList(new ArrayList<>(builder.testReports));
+        this.testMethodReports = Collections.unmodifiableList(new ArrayList<>(builder.testReports));
     }
 
     public static Builder aTestClassReport() {
@@ -42,12 +42,16 @@ public class TestClassReport {
     }
 
     public List<TestMethodReport> getTestMethodReports() {
-        return this.testReports;
+        return this.testMethodReports;
+    }
+
+    public int getTestMethodReportCount() {
+        return this.testMethodReports.size();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(this.testClassName).append(this.testReports.hashCode()).hashCode();
+        return new HashCodeBuilder().append(this.testClassName).append(this.testMethodReports.hashCode()).hashCode();
     }
 
     @Override
@@ -59,7 +63,7 @@ public class TestClassReport {
         }
         TestClassReport other = (TestClassReport) obj;
         return new EqualsBuilder().append(this.testClassName, other.testClassName)
-                .append(this.testReports, other.testReports).isEquals();
+                .append(this.testMethodReports, other.testMethodReports).isEquals();
     }
 
     @Override

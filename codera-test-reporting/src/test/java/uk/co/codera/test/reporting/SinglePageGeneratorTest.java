@@ -1,5 +1,6 @@
 package uk.co.codera.test.reporting;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.anyMapOf;
@@ -12,6 +13,7 @@ import static uk.co.codera.test.dto.ExampleTestClassReports.aValidTestClassRepor
 import java.util.Map;
 import java.util.UUID;
 
+import org.apache.velocity.tools.generic.DisplayTool;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,11 +39,15 @@ public class SinglePageGeneratorTest {
     @Captor
     private ArgumentCaptor<Map<String, Object>> modelCaptor;
 
+    private ReportMetadata reportMetadata;
+
     private ReportGenerator generator;
 
     @Before
     public void before() {
-        this.generator = new SinglePageGenerator(this.mockTemplateEngine, this.template, this.mockReportWriter);
+        this.reportMetadata = TestReportMetadata.validReportMetadata().build();
+        this.generator = new SinglePageGenerator(this.reportMetadata, this.mockTemplateEngine, this.template,
+                this.mockReportWriter);
     }
 
     @Test
@@ -69,6 +75,18 @@ public class SinglePageGeneratorTest {
         TestClassReports reports = testClassReports();
         generateReport(reports);
         assertThat(capturedModel().get("testClassReports"), is(reports));
+    }
+
+    @Test
+    public void shouldPassProjectNameFromMetadataWithModel() {
+        generateReport();
+        assertThat(capturedModel().get("projectName"), is(this.reportMetadata.getProjectName()));
+    }
+    
+    @Test
+    public void shouldPassDisplayToolWithModel() {
+        generateReport();
+        assertThat(capturedModel().get("displayTool"), is(instanceOf(DisplayTool.class)));
     }
 
     private void generateReport() {

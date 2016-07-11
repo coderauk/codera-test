@@ -19,6 +19,10 @@ public class TestClassReports implements Iterable<TestClassReport> {
         return new TestClassReports(Arrays.asList(reports));
     }
 
+    public static TestClassReports over(List<TestClassReport> reports) {
+        return new TestClassReports(Collections.unmodifiableList(reports));
+    }
+
     @Override
     public Iterator<TestClassReport> iterator() {
         return this.reports.iterator();
