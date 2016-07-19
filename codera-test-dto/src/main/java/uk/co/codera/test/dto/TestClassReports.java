@@ -16,7 +16,7 @@ public class TestClassReports implements Iterable<TestClassReport> {
     }
 
     public static TestClassReports over(TestClassReport... reports) {
-        return new TestClassReports(Arrays.asList(reports));
+        return over(Arrays.asList(reports));
     }
 
     public static TestClassReports over(List<TestClassReport> reports) {
