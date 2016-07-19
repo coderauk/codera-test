@@ -82,7 +82,7 @@ public class SinglePageGeneratorTest {
         generateReport();
         assertThat(capturedModel().get("projectName"), is(this.reportMetadata.getProjectName()));
     }
-    
+
     @Test
     public void shouldPassDisplayToolWithModel() {
         generateReport();
