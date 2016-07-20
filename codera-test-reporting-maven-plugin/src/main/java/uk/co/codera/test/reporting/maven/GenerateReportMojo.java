@@ -50,11 +50,14 @@ public class GenerateReportMojo extends AbstractMojo {
     }
 
     private ReportGenerator reportGenerator(ReportMetadata reportMetadata, String template) {
-        if (StringUtils.isBlank(this.jiraBaseUrl)) {
-            return new SinglePageGenerator(reportMetadata, new VelocityTemplateEngine(), template, this::writeReport);
+        SinglePageGenerator.Builder singlePageGenerator = SinglePageGenerator.aSinglePageGenerator()
+                .reportMetadata(reportMetadata).templateEngine(new VelocityTemplateEngine()).template(template)
+                .reportWriter(this::writeReport);
+
+        if (StringUtils.isNotBlank(this.jiraBaseUrl)) {
+            singlePageGenerator.issueUrlFactory(new JiraIssueUrlFactory(this.jiraBaseUrl));
         }
-        return new SinglePageGenerator(reportMetadata, new VelocityTemplateEngine(), template, this::writeReport,
-                new JiraIssueUrlFactory(this.jiraBaseUrl));
+        return singlePageGenerator.build();
     }
 
     private TestClassReports testClassReports() {

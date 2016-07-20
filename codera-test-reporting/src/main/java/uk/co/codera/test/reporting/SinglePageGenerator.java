@@ -23,18 +23,16 @@ public class SinglePageGenerator implements ReportGenerator {
     private final ReportWriter reportWriter;
     private final IssueUrlFactory issueUrlFactory;
 
-    public SinglePageGenerator(ReportMetadata reportMetadata, TemplateEngine templateEngine, String template,
-            ReportWriter reportWriter) {
-        this(reportMetadata, templateEngine, template, reportWriter, null);
+    private SinglePageGenerator(Builder builder) {
+        this.reportMetadata = builder.reportMetadata;
+        this.templateEngine = builder.templateEngine;
+        this.template = builder.template;
+        this.reportWriter = builder.reportWriter;
+        this.issueUrlFactory = builder.issueUrlFactory;
     }
 
-    public SinglePageGenerator(ReportMetadata reportMetadata, TemplateEngine templateEngine, String template,
-            ReportWriter reportWriter, IssueUrlFactory issueUrlFactory) {
-        this.reportMetadata = reportMetadata;
-        this.templateEngine = templateEngine;
-        this.template = template;
-        this.reportWriter = reportWriter;
-        this.issueUrlFactory = issueUrlFactory;
+    public static Builder aSinglePageGenerator() {
+        return new Builder();
     }
 
     @Override
@@ -56,5 +54,46 @@ public class SinglePageGenerator implements ReportGenerator {
         }
 
         return model;
+    }
+
+    public static class Builder {
+        private ReportMetadata reportMetadata;
+        private TemplateEngine templateEngine;
+        private String template;
+        private ReportWriter reportWriter;
+        private IssueUrlFactory issueUrlFactory;
+
+        private Builder() {
+            super();
+        }
+
+        public Builder reportMetadata(ReportMetadata reportMetadata) {
+            this.reportMetadata = reportMetadata;
+            return this;
+        }
+
+        public Builder templateEngine(TemplateEngine templateEngine) {
+            this.templateEngine = templateEngine;
+            return this;
+        }
+
+        public Builder template(String template) {
+            this.template = template;
+            return this;
+        }
+
+        public Builder reportWriter(ReportWriter reportWriter) {
+            this.reportWriter = reportWriter;
+            return this;
+        }
+
+        public Builder issueUrlFactory(IssueUrlFactory issueUrlFactory) {
+            this.issueUrlFactory = issueUrlFactory;
+            return this;
+        }
+
+        public ReportGenerator build() {
+            return new SinglePageGenerator(this);
+        }
     }
 }

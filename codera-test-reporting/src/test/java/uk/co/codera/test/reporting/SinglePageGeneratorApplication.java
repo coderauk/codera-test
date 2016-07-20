@@ -16,8 +16,9 @@ public class SinglePageGeneratorApplication {
         TestClassReportFilesReader filesReader = new TestClassReportFilesReader(rootDirectory);
         TestClassReports reports = TestClassReports.over(filesReader.read());
 
-        ReportGenerator reportGenerator = new SinglePageGenerator(reportMetadata, new VelocityTemplateEngine(),
-                template, SinglePageGeneratorApplication::writeReport);
+        ReportGenerator reportGenerator = SinglePageGenerator.aSinglePageGenerator().reportMetadata(reportMetadata)
+                .templateEngine(new VelocityTemplateEngine()).template(template)
+                .reportWriter(SinglePageGeneratorApplication::writeReport).build();
 
         reportGenerator.generate(reports);
     }

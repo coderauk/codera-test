@@ -48,8 +48,7 @@ public class SinglePageGeneratorTest {
     @Before
     public void before() {
         this.reportMetadata = TestReportMetadata.validReportMetadata().build();
-        this.generator = new SinglePageGenerator(this.reportMetadata, this.mockTemplateEngine, this.template,
-                this.mockReportWriter);
+        this.generator = aSinglePageGenerator().build();
     }
 
     @Test
@@ -106,8 +105,7 @@ public class SinglePageGeneratorTest {
     @Test
     public void shouldPassIssueUrlFactoryToModelIfProvided() {
         IssueUrlFactory issueUrlFactory = mock(IssueUrlFactory.class);
-        this.generator = new SinglePageGenerator(this.reportMetadata, this.mockTemplateEngine, this.template,
-                this.mockReportWriter, issueUrlFactory);
+        this.generator = aSinglePageGenerator().issueUrlFactory(issueUrlFactory).build();
         generateReport();
         assertThat(capturedModel().containsKey("issueUrlFactory"), is(true));
     }
@@ -127,5 +125,10 @@ public class SinglePageGeneratorTest {
 
     private TestClassReports testClassReports() {
         return TestClassReports.over(aValidTestClassReport().build(), aValidTestClassReport().build());
+    }
+
+    private SinglePageGenerator.Builder aSinglePageGenerator() {
+        return SinglePageGenerator.aSinglePageGenerator().reportMetadata(this.reportMetadata)
+                .templateEngine(this.mockTemplateEngine).template(this.template).reportWriter(this.mockReportWriter);
     }
 }
