@@ -1,3 +1,17 @@
+#macro( issues $issues )
+	#if(${issueUrlFactory})
+		#set($first = true)
+		#if (!$first)
+		,&nbsp;
+		#end
+		#foreach ($issue in $issues) 
+			<a href="${issueUrlFactory.generate($issue)}">$issue</a>
+		#end
+		#set($first = false)
+	#else
+		$displayTool.list($issues,", ")
+	#end
+#end
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -64,7 +78,7 @@
 							<tr>
 								<td>${testMethodReport.methodNameAsEnglish}</td>
 								<td>${testMethodReport.testType}</td>
-								<td>$displayTool.list($testMethodReport.issues,", ")</td>
+								<td>#issues($testMethodReport.issues)</td>
 							</tr>
 							#end
 						</tbody>

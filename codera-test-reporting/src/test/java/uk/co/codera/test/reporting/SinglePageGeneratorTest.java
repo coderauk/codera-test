@@ -6,6 +6,7 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.anyMapOf;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static uk.co.codera.test.dto.ExampleTestClassReports.aValidTestClassReport;
@@ -23,6 +24,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import uk.co.codera.templating.TemplateEngine;
+import uk.co.codera.test.dto.IssueUrlFactory;
 import uk.co.codera.test.dto.TestClassReports;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -93,6 +95,21 @@ public class SinglePageGeneratorTest {
     public void shouldPassDisplayToolWithModel() {
         generateReport();
         assertThat(capturedModel().get("displayTool"), is(instanceOf(DisplayTool.class)));
+    }
+
+    @Test
+    public void shouldNotPassIssueUrlFactoryToModelIfNotProvided() {
+        generateReport();
+        assertThat(capturedModel().containsKey("issueUrlFactory"), is(false));
+    }
+
+    @Test
+    public void shouldPassIssueUrlFactoryToModelIfProvided() {
+        IssueUrlFactory issueUrlFactory = mock(IssueUrlFactory.class);
+        this.generator = new SinglePageGenerator(this.reportMetadata, this.mockTemplateEngine, this.template,
+                this.mockReportWriter, issueUrlFactory);
+        generateReport();
+        assertThat(capturedModel().containsKey("issueUrlFactory"), is(true));
     }
 
     private void generateReport() {
