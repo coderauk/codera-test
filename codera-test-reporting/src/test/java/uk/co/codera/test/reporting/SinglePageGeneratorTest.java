@@ -84,6 +84,12 @@ public class SinglePageGeneratorTest {
     }
 
     @Test
+    public void shouldPassVersionFromMetadataWithModel() {
+        generateReport();
+        assertThat(capturedModel().get("version"), is(this.reportMetadata.getVersion()));
+    }
+
+    @Test
     public void shouldPassDisplayToolWithModel() {
         generateReport();
         assertThat(capturedModel().get("displayTool"), is(instanceOf(DisplayTool.class)));

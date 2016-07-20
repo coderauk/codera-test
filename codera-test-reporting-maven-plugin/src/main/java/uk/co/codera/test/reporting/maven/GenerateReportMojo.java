@@ -29,7 +29,7 @@ public class GenerateReportMojo extends AbstractMojo {
     public void execute() throws MojoExecutionException, MojoFailureException {
         if (isPomModule()) {
             ReportMetadata reportMetadata = ReportMetadata.someReportMetadata()
-                    .projectName(this.project.getArtifactId()).build();
+                    .projectName(this.project.getArtifactId()).version(this.project.getVersion()).build();
             String template = new ClasspathResource("/templates/template-single-page-html.vm").getAsString();
 
             TestClassReportFilesReader filesReader = new TestClassReportFilesReader(rootDirectory());

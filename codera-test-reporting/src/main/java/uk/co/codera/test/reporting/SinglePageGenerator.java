@@ -12,6 +12,7 @@ public class SinglePageGenerator implements ReportGenerator {
 
     private static final String MODEL_ATTRIBUTE_DISPLAY_TOOL = "displayTool";
     private static final String MODEL_ATTRIBUTE_PROJECT_NAME = "projectName";
+    private static final String MODEL_ATTRIBUTE_VERSION = "version";
     private static final String MODEL_ATTRIBUTE_TEST_CLASS_REPORTS = "testClassReports";
 
     private final ReportMetadata reportMetadata;
@@ -38,6 +39,7 @@ public class SinglePageGenerator implements ReportGenerator {
         Map<String, Object> model = new HashMap<>();
         model.put(MODEL_ATTRIBUTE_DISPLAY_TOOL, new DisplayTool());
         model.put(MODEL_ATTRIBUTE_PROJECT_NAME, this.reportMetadata.getProjectName());
+        model.put(MODEL_ATTRIBUTE_VERSION, this.reportMetadata.getVersion());
         model.put(MODEL_ATTRIBUTE_TEST_CLASS_REPORTS, classReports);
         return model;
     }
