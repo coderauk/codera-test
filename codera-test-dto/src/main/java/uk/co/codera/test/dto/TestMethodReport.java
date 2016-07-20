@@ -119,7 +119,19 @@ public class TestMethodReport {
         }
 
         private TestType mergeTestType() {
-            return testMetadata == null ? defaultMetadata.type() : testMetadata.type();
+            return shouldUseClassLevelTestType() ? defaultMetadata.type() : testMetadata.type();
+        }
+
+        private boolean shouldUseClassLevelTestType() {
+            return metadataNotSuppliedAtMethodLevel() || testTypeSpecifiedAtClassLevel();
+        }
+
+        private boolean metadataNotSuppliedAtMethodLevel() {
+            return testMetadata == null;
+        }
+
+        private boolean testTypeSpecifiedAtClassLevel() {
+            return defaultMetadata.type() != TestType.UNIT;
         }
 
         private Set<String> mergeIssues() {

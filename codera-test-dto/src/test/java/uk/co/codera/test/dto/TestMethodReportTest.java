@@ -45,6 +45,13 @@ public class TestMethodReportTest {
     }
 
     @Test
+    public void shouldNotOverrideTestTypeSpecifiedAtClassLevel() {
+        TestMethodReport methodReport = aTestMethodReport().defaultMetadata(classLevelMetadata())
+                .testMetadata(methodLevelMetadata()).build();
+        assertThat(methodReport.getTestType(), is(TestType.INTEGRATION));
+    }
+
+    @Test
     public void shouldReturnIssueCount() {
         TestMethodReport methodReport = aTestMethodReport().defaultMetadata(classLevelMetadata())
                 .testMetadata(methodLevelMetadata()).build();
