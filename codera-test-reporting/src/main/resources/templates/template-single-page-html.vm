@@ -8,7 +8,7 @@
 	    <title>Test Report - ${projectName}</title>
 	    
 	    <!-- Bootstrap -->
-	    <link href="css/bootstrap.min.css" rel="stylesheet">
+	    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 	
 	    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -20,13 +20,34 @@
 	<body>
 		<div class="container-fluid">
 			<h1>Test Report <small>${projectName}</small></h1>
-			
+			<form class="form-horizontal">
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Total Number of Test Classes</label>
+					<div class="col-sm-10">
+						<p class="form-control-static">${testClassReports.size()}</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Total Number of Test Methods</label>
+					<div class="col-sm-10">
+						<p class="form-control-static">${testClassReports.totalTestMethodReportCount}</p>
+					</div>
+				</div>
+			</form>
 			#foreach($testClassReport in $testClassReports)
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="panel-title">Test Case: ${testClassReport.testClassName}</h3>
 					</div>
 					<div class="panel-body">
+						<form class="form-horizontal">
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Total Number of Test Methods</label>
+								<div class="col-sm-10">
+									<p class="form-control-static">${testClassReport.testMethodReportCount}</p>
+								</div>
+							</div>
+						</form>					
 					</div>
 					<table class="table">
 						<thead>

@@ -36,6 +36,14 @@ public class TestClassReports implements Iterable<TestClassReport> {
         return sort((o1, o2) -> o2.getTestClassName().compareTo(o1.getTestClassName()));
     }
 
+    public int getTotalTestMethodReportCount() {
+        return this.reports.stream().mapToInt(classReport -> classReport.getTestMethodReportCount()).sum();
+    }
+
+    public int size() {
+        return this.reports.size();
+    }
+
     private TestClassReports sort(Comparator<TestClassReport> comparator) {
         List<TestClassReport> toSort = new ArrayList<>(this.reports);
         Collections.sort(toSort, comparator);

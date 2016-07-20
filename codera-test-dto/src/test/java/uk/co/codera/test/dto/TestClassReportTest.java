@@ -52,6 +52,13 @@ public class TestClassReportTest {
     }
 
     @Test
+    public void shouldBeAbleToClearTestMethodReportsUsingBuilder() {
+        TestClassReport classReport = aTestClassReport().addTestMethodReport(aTestMethodReport()).noTestMethodReports()
+                .build();
+        assertThat(classReport.getTestMethodReportCount(), is(0));
+    }
+
+    @Test
     public void shouldNotBeEqualToNull() {
         assertThat(aTestClassReport().build(), is(not(equalTo(null))));
     }

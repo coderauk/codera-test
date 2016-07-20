@@ -3,6 +3,7 @@ package uk.co.codera.test.dto;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static uk.co.codera.test.dto.ExampleTestClassReports.aValidTestClassReport;
+import static uk.co.codera.test.dto.ExampleTestMethodReports.aValidTestMethodReport;
 
 import java.util.Iterator;
 
@@ -57,6 +58,21 @@ public class TestClassReportsTest {
                 .iterator();
         assertThat(iterator.next(), is(report2));
         assertThat(iterator.next(), is(report1));
+    }
+
+    @Test
+    public void shouldReportTotalNumberOfTestMethodsCorrectly() {
+        TestClassReport report1 = aValidTestClassReport().noTestMethodReports()
+                .addTestMethodReport(aValidTestMethodReport()).build();
+        TestClassReport report2 = aValidTestClassReport().noTestMethodReports()
+                .addTestMethodReport(aValidTestMethodReport()).addTestMethodReport(aValidTestMethodReport()).build();
+        assertThat(TestClassReports.over(report1, report2).getTotalTestMethodReportCount(), is(3));
+    }
+
+    @Test
+    public void shouldReportNumberOfClassReportsCorrectly() {
+        assertThat(TestClassReports.over(aValidTestClassReport().build(), aValidTestClassReport().build()).size(),
+                is(2));
     }
 
     private TestClassReport aTestClassReport() {

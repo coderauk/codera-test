@@ -96,6 +96,11 @@ public class TestClassReport {
             return this;
         }
 
+        public Builder noTestMethodReports() {
+            this.testReports.clear();
+            return this;
+        }
+
         public TestClassReport build() {
             return new TestClassReport(this);
         }
