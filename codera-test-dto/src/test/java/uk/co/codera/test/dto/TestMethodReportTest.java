@@ -45,10 +45,23 @@ public class TestMethodReportTest {
     }
 
     @Test
-    public void shouldNotOverrideTestTypeSpecifiedAtClassLevel() {
+    public void shouldNotOverrideTestTypeSpecifiedAtClassLevelAndNoAnnotationAtMethodLevel() {
+        TestMethodReport methodReport = aTestMethodReport().defaultMetadata(classLevelMetadata()).build();
+        assertThat(methodReport.getTestType(), is(TestType.INTEGRATION));
+    }
+
+    @Test
+    public void shouldNotOverrideTestTypeSpecifiedAtClassLevelAndAnnotatedAtMethodLevelAsWell() {
         TestMethodReport methodReport = aTestMethodReport().defaultMetadata(classLevelMetadata())
                 .testMetadata(methodLevelMetadata()).build();
         assertThat(methodReport.getTestType(), is(TestType.INTEGRATION));
+    }
+
+    @Test
+    public void shouldOverrideTestTypeIfSpecifiedAtMethodLevelButNotClassLevel() {
+        TestMethodReport methodReport = aTestMethodReport().testMetadata(methodLevelMetadataWithComponentType())
+                .build();
+        assertThat(methodReport.getTestType(), is(TestType.COMPONENT));
     }
 
     @Test
@@ -96,11 +109,19 @@ public class TestMethodReportTest {
         return metadataFor(MethodLevelMetadata.class);
     }
 
+    private TestMetadata methodLevelMetadataWithComponentType() {
+        return metadataFor(MethodLevelMetadataWithComponentType.class);
+    }
+
     @TestMetadata(type = TestType.INTEGRATION, issues = { "ISSUE-1" })
     private static class ClassLevelMetadata {
     }
 
     @TestMetadata(issues = { "ISSUE-2" })
     private static class MethodLevelMetadata {
+    }
+
+    @TestMetadata(type = TestType.COMPONENT)
+    private static class MethodLevelMetadataWithComponentType {
     }
 }
