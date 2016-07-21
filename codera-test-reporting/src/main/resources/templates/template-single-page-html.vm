@@ -65,6 +65,13 @@
 						<h3 class="panel-title">Test Case: ${testClassReport.testClassName}</h3>
 					</div>
 					<div class="panel-body">
+						#if(${testClassReport.hasAllTestMethodReportsDeclaredIssues()})
+							<div class="alert alert-success" role="alert">All methods relate to at least one issue</div>
+						#elseif(${testClassReport.hasNoTestMethodReportsDeclaredIssues()})
+							<div class="alert alert-danger" role="alert">No methods relate to any issues</div>
+						#else
+							<div class="alert alert-warning" role="alert">Some methods do not relate to an issue</div>
+						#end
 						<form class="form-horizontal">
 							<div class="form-group">
 								<label class="col-sm-2 control-label">Total Number of Test Methods</label>
