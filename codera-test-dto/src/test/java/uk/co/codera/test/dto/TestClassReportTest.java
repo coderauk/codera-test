@@ -6,6 +6,8 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.empty;
 import static org.junit.Assert.assertThat;
+import static uk.co.codera.test.dto.ExampleTestMethodReports.aValidTestMethodReport;
+import static uk.co.codera.test.dto.ExampleTestMethodReports.aValidTestMethodReportWithDefaultMetadata;
 import static uk.co.codera.test.dto.TestClassReport.aTestClassReport;
 import static uk.co.codera.test.dto.TestMetadataFactory.metadataFor;
 import static uk.co.codera.test.dto.TestMethodReport.aTestMethodReport;
@@ -76,6 +78,37 @@ public class TestClassReportTest {
     @Test
     public void shouldNotBeEqualIfForDifferentClass() {
         assertNotEqual(aTestClassReport().testClassName("testClass1"), aTestClassReport().testClassName("testClass2"));
+    }
+
+    @Test
+    public void shouldReportIfAllTestMethodReportsDeclareIssues() {
+        assertThat(
+                aTestClassReport().addTestMethodReport(aValidTestMethodReport())
+                        .addTestMethodReport(aValidTestMethodReport()).build().hasAllTestMethodReportsDeclaredIssues(),
+                is(true));
+    }
+
+    @Test
+    public void shouldReportIfNotAllTestMethodReportsDeclareIssues() {
+        assertThat(
+                aTestClassReport().addTestMethodReport(aValidTestMethodReport())
+                        .addTestMethodReport(aValidTestMethodReportWithDefaultMetadata()).build()
+                        .hasAllTestMethodReportsDeclaredIssues(), is(false));
+    }
+
+    @Test
+    public void shouldReportIfNoTestMethodReportsDeclareIssues() {
+        assertThat(aTestClassReport().addTestMethodReport(aValidTestMethodReportWithDefaultMetadata())
+                .addTestMethodReport(aValidTestMethodReportWithDefaultMetadata()).build()
+                .hasNoTestMethodReportsDeclaredIssues(), is(true));
+    }
+
+    @Test
+    public void shouldReportIfSomeTestMethodReportsDeclareIssues() {
+        assertThat(
+                aTestClassReport().addTestMethodReport(aValidTestMethodReport())
+                        .addTestMethodReport(aValidTestMethodReportWithDefaultMetadata()).build()
+                        .hasNoTestMethodReportsDeclaredIssues(), is(false));
     }
 
     private void assertEqual(TestClassReport.Builder report1, TestClassReport.Builder report2) {

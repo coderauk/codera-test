@@ -49,6 +49,14 @@ public class TestClassReport {
         return this.testMethodReports.size();
     }
 
+    public boolean hasAllTestMethodReportsDeclaredIssues() {
+        return this.testMethodReports.stream().allMatch(report -> report.hasIssues());
+    }
+
+    public boolean hasNoTestMethodReportsDeclaredIssues() {
+        return this.testMethodReports.stream().noneMatch(report -> report.hasIssues());
+    }
+
     @Override
     public int hashCode() {
         return new HashCodeBuilder().append(this.testClassName).append(this.testMethodReports.hashCode()).hashCode();
