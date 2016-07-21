@@ -72,6 +72,16 @@ public class TestMethodReportTest {
     }
 
     @Test
+    public void shouldDeclareIfItHasIssues() {
+        assertThat(aTestMethodReport().defaultMetadata(classLevelMetadata()).build().hasIssues(), is(true));
+    }
+
+    @Test
+    public void shouldDeclareIfItDoesNotHaveIssues() {
+        assertThat(aTestMethodReport().build().hasIssues(), is(false));
+    }
+
+    @Test
     public void shouldNotBeEqualToNull() {
         assertThat(aTestMethodReport().build(), is(not(equalTo(null))));
     }

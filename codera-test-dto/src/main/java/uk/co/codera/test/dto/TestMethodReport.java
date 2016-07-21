@@ -64,6 +64,10 @@ public class TestMethodReport {
         return this.issues.size();
     }
 
+    public boolean hasIssues() {
+        return !this.issues.isEmpty();
+    }
+
     @Override
     public int hashCode() {
         return new HashCodeBuilder().append(this.methodName).hashCode();

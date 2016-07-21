@@ -1,15 +1,20 @@
-#macro( issues $issues )
-	#if(${issueUrlFactory})
-		#set($first = true)
-		#if (!$first)
-		,&nbsp;
+#macro( issues $testMethodReport )
+	#if($testMethodReport.hasIssues())
+		#set($issues = $testMethodReport.issues)
+		#if(${issueUrlFactory})
+			#set($first = true)
+			#if (!$first)
+			,&nbsp;
+			#end
+			#foreach ($issue in $issues) 
+				<a href="${issueUrlFactory.generate($issue)}">$issue</a>
+			#end
+			#set($first = false)
+		#else
+			$displayTool.list($issues,", ")
 		#end
-		#foreach ($issue in $issues) 
-			<a href="${issueUrlFactory.generate($issue)}">$issue</a>
-		#end
-		#set($first = false)
 	#else
-		$displayTool.list($issues,", ")
+		<div class="alert alert-danger" role="alert">No issues declared</div>
 	#end
 #end
 <!DOCTYPE html>
@@ -78,7 +83,7 @@
 							<tr>
 								<td>${testMethodReport.methodNameAsEnglish}</td>
 								<td>${testMethodReport.testType}</td>
-								<td>#issues($testMethodReport.issues)</td>
+								<td>#issues($testMethodReport)</td>
 							</tr>
 							#end
 						</tbody>
