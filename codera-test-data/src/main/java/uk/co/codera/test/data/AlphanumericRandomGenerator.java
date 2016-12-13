@@ -4,10 +4,10 @@ import static org.apache.commons.lang3.RandomStringUtils.randomAlphanumeric;
 
 public class AlphanumericRandomGenerator implements DataGenerator<String> {
 
-    private final Integer length;
+    private final int length;
 
     private AlphanumericRandomGenerator(Builder builder) {
-        this.length = builder.length == null ? 10 : builder.length;
+        this.length = builder.length;
     }
 
     public static Builder aRandomAlphanumericGenerator() {
@@ -21,13 +21,13 @@ public class AlphanumericRandomGenerator implements DataGenerator<String> {
 
     public static class Builder {
 
-        private Integer length;
+        private int length = 10;
 
         private Builder() {
             super();
         }
 
-        public Builder length(Integer length) {
+        public Builder length(int length) {
             this.length = length;
             return this;
         }

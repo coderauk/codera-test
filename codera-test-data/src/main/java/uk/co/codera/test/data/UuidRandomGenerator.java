@@ -5,6 +5,7 @@ import java.util.UUID;
 public class UuidRandomGenerator implements DataGenerator<String> {
 
     private UuidRandomGenerator(Builder builder) {
+        super();
     }
 
     public static Builder aRandomUuidGenerator() {
